@@ -10,7 +10,7 @@ const OUT = process.argv[2] || "going-independent.pptx";
 const C = {
   dark: "16211C", dark2: "1F2D26", ridge1: "1E2C25", ridge2: "243429",
   light: "F7F7F4", card: "EDEFEB", ink: "16211C", muted: "4A5550", mutedDark: "B9C7BE",
-  amber: "E0A458", amberDeep: "A5541A", slate: "5C6962", white: "FBFBF8",
+  amber: "E0A458", forest: "2F4A3C", mutedForest: "C9D6CD", amberDeep: "A5541A", slate: "5C6962", white: "FBFBF8",
 };
 const HEAD = "Cambria";
 const BODY = "Calibri";
@@ -58,8 +58,8 @@ function title(slide, text, color, opts = {}) {
   const I = {
     search: await icon(fa.FaSearch, C.amber), chat: await icon(fa.FaComments, C.amber),
     cloud: await icon(fa.FaCloud, C.amber), lock: await icon(fa.FaLock, C.amber),
-    sell: await icon(fa.FaHandshake, C.ink), deliver: await icon(fa.FaTools, C.ink),
-    run: await icon(fa.FaFileInvoiceDollar, C.ink),
+    sell: await icon(fa.FaHandshake, C.amber), deliver: await icon(fa.FaTools, C.amber),
+    run: await icon(fa.FaFileInvoiceDollar, C.amber),
     code: await icon(fa.FaCodeBranch, C.amber), mic: await icon(fa.FaMicrophone, C.amber),
     pen: await icon(fa.FaPenNib, C.amber), trust: await icon(fa.FaHandshake, C.dark),
     work: await icon(fa.FaWrench, C.amberDeep), doc: await icon(fa.FaFileAlt, C.amberDeep),
@@ -129,7 +129,7 @@ function title(slide, text, color, opts = {}) {
       ["AFTER COLLEGE", "The employee years", "NASA, FBI, Leidos, etc. Always working to get back to self-employed.", C.slate],
       ["2018", "Self-employed again", "Started taking on independent work.", C.amberDeep],
       ["2019", "Fully independent", "Consulting became the whole job.", C.amberDeep],
-      ["TODAY", "Consulting today", "Search, NLP, and cloud consulting.", C.amberDeep],
+      ["2026", "Consulting today", "Search, NLP, and cloud consulting.", C.amberDeep],
     ];
     const gap = 0.3, cw = (W - 2 * M - 4 * gap) / 5, ly = 2.75, dot = 0.34;
     s.addShape(pres.shapes.LINE, { x: M + dot / 2, y: ly, w: 4 * (cw + gap), h: 0, line: { color: "C9C2B2", width: 2 } });
@@ -146,28 +146,31 @@ function title(slide, text, color, opts = {}) {
     s.addNotes("I caught the self-employment bug early. I started a software company around age 15 and worked it through college. After that I took the employee route: NASA, the FBI, Leidos, and others. Those were great projects, but the goal was always to get back to working for myself. I started doing independent work again in 2018 and went fully independent in 2019. Today that's search, NLP, and cloud consulting. The point for you: your path doesn't have to be linear. Those employee years gave me experience and knowledge I use with clients every day. [Optional: add what made 2018 the right time.]");
   }
 
-  // 4. Definition (accent statement)
+  // 4. Definition (statement slide)
   {
     const s = pres.addSlide();
-    s.background = { color: C.amber }; num(s, C.ink);
-    eyebrow(s, "What it means", C.ink);
+    s.background = { color: C.forest }; num(s, C.mutedDark);
+    eyebrow(s, "What it means", C.amber);
     s.addText("An independent consultant is a business of one.", {
-      x: M, y: 1.0, w: 11, h: 1.8, fontFace: HEAD, fontSize: 48, bold: true, color: C.ink, margin: 0, valign: "top", isTextBox: true,
+      x: M, y: 1.0, w: 11, h: 1.8, fontFace: HEAD, fontSize: 48, bold: true, color: C.white, margin: 0, valign: "top", isTextBox: true,
     });
     const cols = [
       [I.sell, "You sell it", "Find clients, understand their problem, scope the work, set your rate."],
       [I.deliver, "You deliver it", "Do the expert work, and be the person accountable for the result."],
-      [I.run, "You run it", "Contracts, invoices, taxes, insurance, and your own training."],
+      [I.run, "You run it", "Contracts, invoices, taxes, and insurance."],
     ];
     const gap = 0.45, cw = (W - 2 * M - 2 * gap) / 3;
     cols.forEach(([img, head, body], i) => {
       const x = M + i * (cw + gap);
-      s.addShape(pres.shapes.OVAL, { x, y: 3.55, w: 0.8, h: 0.8, fill: { color: "F2C98E" }, line: { type: "none" } });
+      s.addShape(pres.shapes.OVAL, { x, y: 3.55, w: 0.8, h: 0.8, fill: { color: "3D5E4D" }, line: { type: "none" } });
       s.addImage({ data: img, x: x + 0.2, y: 3.75, w: 0.4, h: 0.4, altText: "" });
-      s.addText(head, { x, y: 4.6, w: cw, h: 0.55, fontFace: HEAD, fontSize: 26, bold: true, color: C.ink, margin: 0, isTextBox: true });
-      s.addText(body, { x, y: 5.2, w: cw, h: 1.1, fontFace: BODY, fontSize: 17, color: "2A2A22", margin: 0, valign: "top", isTextBox: true });
+      s.addText(head, { x, y: 4.6, w: cw, h: 0.55, fontFace: HEAD, fontSize: 26, bold: true, color: C.white, margin: 0, isTextBox: true });
+      s.addText(body, { x, y: 5.2, w: cw, h: 1.1, fontFace: BODY, fontSize: 17, color: C.mutedForest, margin: 0, valign: "top", isTextBox: true });
     });
-    s.addNotes("This is the one idea I want you to take away. When you're independent, being great at the technical work is only one third of the job. You also have to sell it: find clients, understand their problem, scope the work, and set your rate. And you have to run it: contracts, invoices, taxes, insurance, and your own training. Nobody hands you a project, and nobody chases an unpaid invoice for you.");
+    s.addText("Don\u2019t let the business side scare you \u2013 there are resources available.", {
+      x: M, y: 6.35, w: W - 2 * M - 1.0, h: 0.45, fontFace: BODY, fontSize: 16, italic: true, color: C.mutedForest, margin: 0, valign: "middle", isTextBox: true,
+    });
+    s.addNotes("This is the one idea I want you to take away. When you're independent, being great at the technical work is only one third of the job. You also have to sell it: find clients, understand their problem, scope the work, and set your rate. And you have to run it: contracts, invoices, taxes, and insurance. Nobody hands you a project, and nobody chases an unpaid invoice for you. But don't let the business side scare you. There are resources available, from accountants and lawyers to small business development centers and other independents who are happy to share what they've learned.");
   }
 
   // 5. Services
@@ -206,7 +209,7 @@ function title(slide, text, color, opts = {}) {
         "You set your own schedule",
         "You learn across many industries",
         "Your name is the brand",
-        "Freedom in clients, schedule, and focus",
+        "You decide how you work",
       ]],
       [I.warn, "What's hard", C.slate, C.card, [
         "Income can be irregular",
@@ -227,9 +230,9 @@ function title(slide, text, color, opts = {}) {
       });
     });
     s.addText("* You can pay yourself for time off and track PTO, if that\u2019s important to you.", {
-      x: M, y: 6.4, w: W - 2 * M - 1.0, h: 0.4, fontFace: BODY, fontSize: 14, italic: true, color: C.muted, margin: 0, valign: "middle", isTextBox: true,
+      x: M, y: 6.35, w: W - 2 * M - 1.0, h: 0.45, fontFace: BODY, fontSize: 16, italic: true, color: C.muted, margin: 0, valign: "middle", isTextBox: true,
     });
-    s.addNotes("I want to be honest about both columns. The good side is real: you choose your clients and projects, you set your schedule, you learn across a lot of industries, and your name is the brand. That flexibility is also how I have time for things like wilderness guiding. But the hard side is real too. Income can be irregular. There's no paid vacation by default, though you can pay yourself for time off and track PTO if that matters to you. Staying current takes deliberate effort, change can be difficult, and you're always looking for the next piece of work, even while delivering the current one.");
+    s.addNotes("I want to be honest about both columns. The good side is real: you choose your clients and projects, you set your schedule, you learn across a lot of industries, your name is the brand, and you decide how you work. That flexibility is also how I have time for things like wilderness guiding. But the hard side is real too. Income can be irregular. There's no paid vacation by default, though you can pay yourself for time off and track PTO if that matters to you. Staying current takes deliberate effort, change can be difficult, and you're always looking for the next piece of work, even while delivering the current one.");
   }
 
   // 7. Visibility
@@ -291,7 +294,7 @@ function title(slide, text, color, opts = {}) {
       if (i < 3) s.addShape(pres.shapes.RIGHT_ARROW, { x: x + d + (cw + arrow + 2 * gap - d - arrow) / 2, y: cy + d / 2 - 0.14, w: arrow, h: 0.28, fill: { color: "C9C2B2" }, line: { type: "none" } });
     });
     s.addText("Find how you like to work and build that into your consulting, whether that means short engagements like mine, long-term partnerships, or something in between. It sounds counterintuitive, but short, successful engagements keep clients coming back for more.", {
-      x: M, y: 5.6, w: W - 2 * M, h: 0.8, fontFace: BODY, fontSize: 14, italic: true, color: C.muted, margin: 0, valign: "top", isTextBox: true,
+      x: M, y: 5.45, w: W - 2 * M, h: 1.05, fontFace: BODY, fontSize: 16, italic: true, color: C.muted, margin: 0, valign: "top", isTextBox: true,
     });
     s.addNotes("Every independent consultant needs an angle: not just what you know, but how you like to work with clients. Mine is to empower companies by getting them past a hard problem. I do the work, document it, teach their staff, and move on, usually in three to six months. It sounds counterintuitive, but short, successful engagements keep clients coming back for more. Your angle might look different, like long-term partnerships, and that's fine. Figure out how you like to work and build your consulting around it. [Optional: share a short example engagement, without naming the client.]");
   }
@@ -302,40 +305,40 @@ function title(slide, text, color, opts = {}) {
     s.background = { color: C.dark }; num(s, C.mutedDark);
     eyebrow(s, "Picking a niche", C.amber);
     title(s, "\u201CAI\u201D is too broad. Get specific.", C.white);
-    const lw = 8.0, rx = M + lw + 0.3, rw = W - M - rx;
+    const lw = 8.6, rx = M + lw + 0.3, rw = W - M - rx;
     const label = (t, x, w) => s.addText(t.toUpperCase(), { x, y: 1.95, w, h: 0.3, fontFace: BODY, fontSize: 13, bold: true, color: C.amber, charSpacing: 2, margin: 0, isTextBox: true });
     label("Specific problems", M, lw);
     label("Specific industries", rx, rw);
     const probs = [
       ["Search and retrieval (RAG)", "Help AI find and cite the right documents"],
-      ["LLM evaluation", "Prove AI features are accurate before launch"],
-      ["Privacy and PII", "Keep sensitive data out of prompts and logs"],
+      ["LLM evaluation", "Prove AI features work before launch"],
+      ["Privacy and PII", "Keep sensitive data out of prompts"],
       ["Governance and compliance", "HIPAA, financial rules, the EU AI Act"],
       ["Document processing", "Extract data from contracts, claims, forms"],
       ["Agents and integration", "Connect AI safely to existing systems"],
       ["Cost and performance", "Smaller models, caching, self-hosting"],
       ["AI security", "Prompt injection, data leaks, misuse"],
     ];
-    const g = 0.15, cw = (lw - g) / 2, ch = 0.72, y0 = 2.4;
+    const g = 0.15, cw = (lw - g) / 2, ch = 0.82, y0 = 2.35;
     probs.forEach(([h, d], i) => {
       const x = M + (i % 2) * (cw + g), y = y0 + Math.floor(i / 2) * (ch + g);
       s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w: cw, h: ch, fill: { color: C.dark2 }, rectRadius: 0.08, line: { type: "none" } });
-      s.addText(h, { x: x + 0.2, y: y + 0.08, w: cw - 0.4, h: 0.3, fontFace: HEAD, fontSize: 15, bold: true, color: C.white, margin: 0, isTextBox: true });
-      s.addText(d, { x: x + 0.2, y: y + 0.39, w: cw - 0.4, h: 0.26, fontFace: BODY, fontSize: 13, color: C.mutedDark, margin: 0, isTextBox: true });
+      s.addText(h, { x: x + 0.2, y: y + 0.08, w: cw - 0.4, h: 0.32, fontFace: HEAD, fontSize: 16, bold: true, color: C.white, margin: 0, isTextBox: true });
+      s.addText(d, { x: x + 0.2, y: y + 0.44, w: cw - 0.4, h: 0.3, fontFace: BODY, fontSize: 16, color: C.mutedDark, margin: 0, isTextBox: true });
     });
     const gridH = 4 * ch + 3 * g;
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: rx, y: y0, w: rw, h: gridH, fill: { color: C.dark2 }, rectRadius: 0.08, line: { type: "none" } });
     const inds = ["Healthcare", "Legal", "Finance", "Insurance", "Government", "Manufacturing"];
     s.addText(inds.map((t, j) => ({ text: t, options: { bullet: { indent: 16 }, breakLine: j < inds.length - 1, paraSpaceAfter: 4 } })), {
-      x: rx + 0.3, y: y0 + 0.22, w: rw - 0.6, h: 2.0, fontFace: BODY, fontSize: 16, color: C.white, margin: 0, valign: "top", isTextBox: true,
+      x: rx + 0.25, y: y0 + 0.22, w: rw - 0.5, h: 2.0, fontFace: BODY, fontSize: 16, color: C.white, margin: 0, valign: "top", isTextBox: true,
     });
     s.addText("Knowing an industry\u2019s vocabulary and regulations is often worth more than the technical skill.", {
-      x: rx + 0.3, y: y0 + gridH - 0.95, w: rw - 0.6, h: 0.8, fontFace: BODY, fontSize: 13, italic: true, color: C.mutedDark, margin: 0, valign: "bottom", isTextBox: true,
+      x: rx + 0.25, y: y0 + gridH - 1.25, w: rw - 0.5, h: 1.1, fontFace: BODY, fontSize: 15, italic: true, color: C.mutedDark, margin: 0, valign: "bottom", isTextBox: true,
     });
     s.addText([
-      { text: "Pick two and put them together to find specific problems: ", options: { bold: true, color: C.white } },
+      { text: "Combine a specific problem with a specific industry: ", options: { bold: true, color: C.white } },
       { text: "\u201Cdocument extraction for insurance claims\u201D", options: { color: C.mutedDark } },
-    ], { x: M, y: 6.15, w: W - 2 * M - 1.0, h: 0.5, fontFace: BODY, fontSize: 16, margin: 0, valign: "middle", isTextBox: true });
+    ], { x: M, y: 6.3, w: W - 2 * M - 1.0, h: 0.5, fontFace: BODY, fontSize: 16, margin: 0, valign: "middle", isTextBox: true });
     s.addNotes("Building on the idea of an angle: what does specific actually look like in AI? On the left are problem areas companies are paying for right now: search and retrieval for AI assistants, evaluating whether LLM features actually work, keeping private data out of AI pipelines, compliance, document extraction, agent integration, cost tuning, and AI security. On the right are industries. Pick one from each and put them together. \"AI consultant\" is hard to remember or refer. \"The person who does document extraction for insurance claims\" is easy. And knowing an industry's vocabulary and regulations is often worth more than the technical skill.");
   }
 
